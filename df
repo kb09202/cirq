@@ -1,0 +1,22 @@
+from web3 import Web3
+from ens import ENS
+
+# URL d'Infura avec ton vrai Project ID
+infura_url = "https://mainnet.infura.io/v3/b0fef095748b43198ab79c66f8aec488"
+web3 = Web3(Web3.HTTPProvider(infura_url))
+
+# Vérifie la connexion
+if not web3.is_connected():
+    raise Exception("Impossible de se connecter au réseau Ethereum.")
+
+# Initialiser ENS
+ens = ENS.from_web3(web3)
+
+# Vérifie une adresse ENS
+name = "vitalik.eth"
+addr = ens.address(name)
+
+if addr:
+    print(f"L'adresse associée à {name} est : {addr}")
+else:
+    print(f"Aucune adresse trouvée pour {name}.")

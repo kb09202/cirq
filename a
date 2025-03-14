@@ -1,0 +1,18 @@
+import cirq
+
+# Création de deux qubits
+qubits = [cirq.GridQubit(0, 0), cirq.GridQubit(0, 1)]
+
+# Définition du circuit
+circuit = cirq.Circuit(
+    cirq.H(qubits[0]),  # Hadamard
+    cirq.CZ(qubits[0], qubits[1]),  # Enchevêtrement via CZ
+    cirq.measure(*qubits, key='result')  # Mesurer
+)
+
+# Simulation
+simulator = cirq.Simulator()
+result = simulator.run(circuit, repetitions=10)
+
+print("Circuit:\n", circuit)
+print("Résultats de mesure :\n", result)
